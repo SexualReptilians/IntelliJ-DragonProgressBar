@@ -3,6 +3,7 @@ import com.intellij.ide.ui.LafManagerListener;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class ProgressBarLafManagerListener implements LafManagerListener {
 
