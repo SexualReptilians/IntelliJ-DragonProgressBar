@@ -6,11 +6,6 @@ import javax.swing.*;
 import java.util.Objects;
 
 public class ProgressBarLafManagerListener implements LafManagerListener {
-
-    public ProgressBarLafManagerListener() {
-        updateProgressBarUI();
-    }
-
     @Override
     public void lookAndFeelChanged(@NotNull LafManager lafManager) {
         updateProgressBarUI();
