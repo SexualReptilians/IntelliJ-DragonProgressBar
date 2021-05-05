@@ -17,6 +17,7 @@ public class DragonProgressSettingsComponent {
     private final DefaultListModel<DragonProgressColor> listModel = new DefaultListModel<>();
 
     public DragonProgressSettingsComponent() {
+        // TODO: Make this not shit
         listModel.addElement((new DragonProgressColor(0xFF0000, "/dragon_red.gif", "/dragon_red_m.gif", "Red")));
         listModel.addElement((new DragonProgressColor(0x00FF00, "/dragon_green.gif", "/dragon_green_m.gif", "Green")));
         listModel.addElement((new DragonProgressColor(0x0000FF, "/dragon_blue.gif", "/dragon_blue_m.gif", "Blue")));
@@ -67,6 +68,7 @@ public class DragonProgressSettingsComponent {
         return colorsList.getSelectedValue().getColor();
     }
 
+    // TODO: This is disgusting
     public void setSelection(String name) {
         for (int i = 0; i < listModel.getSize(); i++) {
             if (listModel.get(i).getName().equals(name)) {
