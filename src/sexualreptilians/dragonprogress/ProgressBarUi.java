@@ -52,20 +52,32 @@ public class ProgressBarUi extends BasicProgressBarUI {
             int amountFull = this.getAmountFull(b, barRectWidth, barRectHeight);
 
             Graphics2D g2 = (Graphics2D)g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(this.progressBar.getForeground());
 
             // Paint the background
-            g2.setStroke(new BasicStroke(2));
-            g2.drawRect(b.left, b.top, barRectWidth, barRectHeight);
+            g2.setPaint(this.progressBar.getBackground().darker());
+            g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight/2, barRectHeight/2);
 
             // Clamp dragon so it never clips
             int dragonPosition = amountFull-dragonIcon.getIconWidth()/2;
             if (dragonPosition+dragonIcon.getIconWidth() > barRectWidth) {
                 dragonPosition = barRectWidth-dragonIcon.getIconWidth();
             }
+
             // Paint the progress bar
-            g2.setPaint(this.progressBar.getForeground().darker());
-            g2.fillRect(b.left, b.top, b.left+amountFull, barRectHeight);
+            GradientPaint gradient = new GradientPaint(
+                    (float) b.right,
+                    (float) b.top,
+                    progressColor.darker(),
+                    (float) b.right,
+                    b.top+(float)(barRectHeight/2),
+                    progressColor,
+                    true
+            );
+            g2.setPaint(gradient);
+            g2.fillRoundRect(b.left, b.top, b.left+amountFull, barRectHeight, barRectHeight/2, barRectHeight/2);
+
             // Paint the dragon
             dragonIcon.paintIcon(c, g2, b.left+dragonPosition, b.top);
 
@@ -81,15 +93,16 @@ public class ProgressBarUi extends BasicProgressBarUI {
             Insets b = this.progressBar.getInsets();
             int barRectWidth = this.progressBar.getWidth() - (b.right + b.left);
             int barRectHeight = this.progressBar.getHeight() - (b.top + b.bottom);
+
             if (barRectWidth > 0 && barRectHeight > 0) {
                 Graphics2D g2 = (Graphics2D)g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
                 g2.setColor(this.progressBar.getForeground());
 
                 // Paint the background
-                g2.setStroke(new BasicStroke(2));
-                g2.drawRect(b.left, b.top, barRectWidth, barRectHeight);
-                //g2.fillRect(b.left, b.top, barRectWidth, barRectHeight);
+                g2.setPaint(this.progressBar.getBackground().darker());
+                g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight/2, barRectHeight/2);
 
                 this.boxRect = this.getBox(this.boxRect);
                 if (this.boxRect != null) {
@@ -114,7 +127,6 @@ public class ProgressBarUi extends BasicProgressBarUI {
                             dragonIconM.paintIcon(c, g2, this.boxRect.x, b.top);
                             break;
                     }
-
                     lastX = this.boxRect.x;
                 }
 

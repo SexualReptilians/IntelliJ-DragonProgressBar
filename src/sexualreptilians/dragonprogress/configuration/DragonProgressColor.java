@@ -1,7 +1,5 @@
 package sexualreptilians.dragonprogress.configuration;
 
-import java.awt.*;
-
 public class DragonProgressColor {
 
     private int color;
