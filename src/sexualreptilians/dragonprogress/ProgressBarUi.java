@@ -1,17 +1,17 @@
+package sexualreptilians.dragonprogress;
+
 import com.intellij.util.ui.JBUI;
-import com.intellij.util.ui.UIUtil;
+import sexualreptilians.dragonprogress.configuration.DragonProgressState;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class ProgressBarUi extends BasicProgressBarUI {
     private ImageIcon dragonIcon;
     private ImageIcon dragonIconM;
-    BufferedImage test;
+    private Color progressColor;
 
     // Stupid state machine for mirroring
     private int lastX = 0;
@@ -22,8 +22,10 @@ public class ProgressBarUi extends BasicProgressBarUI {
     private Direction dir = Direction.FORWARD;
 
     public ProgressBarUi() {
-        dragonIcon = new ImageIcon(this.getClass().getResource("/dragon.gif"));
-        dragonIconM = new ImageIcon(this.getClass().getResource("/dragon_m.gif"));
+        DragonProgressState settings = DragonProgressState.getInstance();
+        dragonIcon = new ImageIcon(this.getClass().getResource(settings.dragon));
+        dragonIconM = new ImageIcon(this.getClass().getResource(settings.dragon_m));
+        progressColor = new Color(settings.color);
     }
 
     @SuppressWarnings({"MethodOverridesStaticMethodOfSuperclass", "UnusedDeclaration"})
@@ -53,8 +55,8 @@ public class ProgressBarUi extends BasicProgressBarUI {
             g2.setColor(this.progressBar.getForeground());
 
             // Paint the background
-            g2.setPaint(this.progressBar.getBackground().darker());
-            g2.fillRect(b.left, b.top, barRectWidth, barRectHeight);
+            g2.setStroke(new BasicStroke(2));
+            g2.drawRect(b.left, b.top, barRectWidth, barRectHeight);
 
             // Clamp dragon so it never clips
             int dragonPosition = amountFull-dragonIcon.getIconWidth()/2;
@@ -85,20 +87,20 @@ public class ProgressBarUi extends BasicProgressBarUI {
                 g2.setColor(this.progressBar.getForeground());
 
                 // Paint the background
-                g2.setPaint(this.progressBar.getBackground().darker());
-                g2.fillRect(b.left, b.top, barRectWidth, barRectHeight);
+                g2.setStroke(new BasicStroke(2));
+                g2.drawRect(b.left, b.top, barRectWidth, barRectHeight);
+                //g2.fillRect(b.left, b.top, barRectWidth, barRectHeight);
 
                 this.boxRect = this.getBox(this.boxRect);
                 if (this.boxRect != null) {
                     // Paint the progress bar
-                    g2.setPaint(this.progressBar.getForeground().darker());
-                    g2.fillRect(this.boxRect.x, this.boxRect.y, this.boxRect.width, this.boxRect.height);
+                    //g2.setPaint(this.progressBar.getForeground().darker());
+                    //g2.fillRect(this.boxRect.x, this.boxRect.y, this.boxRect.width, this.boxRect.height);
 
                     // Stupid state machine for mirroring
                     // Otherwise I'd have to reimplement the animator
                     if (this.boxRect.x-lastX < 0) {
                         dir = Direction.BACK;
-
                     }
                     else if (this.boxRect.x-lastX > 0) {
                         dir = Direction.FORWARD;

@@ -1,9 +1,10 @@
+package sexualreptilians.dragonprogress;
+
 import com.intellij.ide.ui.LafManager;
 import com.intellij.ide.ui.LafManagerListener;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.util.Objects;
 
 public class ProgressBarLafManagerListener implements LafManagerListener {
     @Override

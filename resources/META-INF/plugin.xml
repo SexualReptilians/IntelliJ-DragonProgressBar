@@ -15,6 +15,10 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+    <applicationService serviceImplementation="sexualreptilians.dragonprogress.configuration.DragonProgressState"/>
+    <applicationConfigurable parentId="tools" instance="sexualreptilians.dragonprogress.configuration.DragonProgressConfigurable"
+                             id="sexualreptilians.dragonprogress.configuration.DragonProgressConfigurable"
+                             displayName="Dragon Progress Config"/>
   </extensions>
 
   <actions>
@@ -22,7 +26,7 @@
   </actions>
 
   <applicationListeners>
-    <listener class="ProgressBarLafManagerListener"
+    <listener class="sexualreptilians.dragonprogress.ProgressBarLafManagerListener"
               topic="com.intellij.ide.ui.LafManagerListener" />
   </applicationListeners>
 </idea-plugin>
