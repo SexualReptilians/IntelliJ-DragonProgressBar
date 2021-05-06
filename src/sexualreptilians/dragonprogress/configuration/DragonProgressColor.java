@@ -15,7 +15,7 @@ public class DragonProgressColor {
             add(new DragonProgressColor("dragon_orange", "Orange"));
             add(new DragonProgressColor("dragon_lime", "Lime"));
             add(new DragonProgressColor("dragon_cyan", "Cyan"));
-            add(new DragonProgressColor("dragon_purple", "Purple"));
+            add(new DragonProgressColor("dragon_purple", "Purple ^.=.^"));
         }
     };
 

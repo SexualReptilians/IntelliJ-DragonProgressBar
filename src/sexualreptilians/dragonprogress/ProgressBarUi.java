@@ -9,9 +9,11 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
 
 public class ProgressBarUi extends BasicProgressBarUI {
-    private ImageIcon dragonIcon;
-    private ImageIcon dragonIconM;
-    private Color progressColor;
+    private final ImageIcon dragonIcon;
+    private final ImageIcon dragonIconM;
+    private final Color progressColor;
+    private final Color backgroundColor;
+    private final boolean customBackColor;
 
     // Stupid state machine for mirroring
     private int lastX = 0;
@@ -23,9 +25,12 @@ public class ProgressBarUi extends BasicProgressBarUI {
 
     public ProgressBarUi() {
         DragonProgressState settings = DragonProgressState.getInstance();
+        // TODO: Handle nulls (for people messing with the config)
         dragonIcon = new ImageIcon(this.getClass().getResource(settings.getDragonImage()));
         dragonIconM = new ImageIcon(this.getClass().getResource(settings.getDragonImageM()));
         progressColor = new Color(settings.progressColor);
+        backgroundColor = new Color(settings.backColor);
+        customBackColor = settings.useCustomBackColor;
     }
 
     @SuppressWarnings({"MethodOverridesStaticMethodOfSuperclass", "UnusedDeclaration"})
@@ -56,7 +61,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
             g2.setColor(this.progressBar.getForeground());
 
             // Paint the background
-            g2.setPaint(this.progressBar.getBackground().darker());
+            g2.setPaint((customBackColor) ? backgroundColor : progressBar.getBackground().darker());
             g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight/2, barRectHeight/2);
 
             // Clamp dragon so it never clips
@@ -101,7 +106,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
                 g2.setColor(this.progressBar.getForeground());
 
                 // Paint the background
-                g2.setPaint(this.progressBar.getBackground().darker());
+                g2.setPaint((customBackColor) ? backgroundColor : progressBar.getBackground().darker());
                 g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight/2, barRectHeight/2);
 
                 this.boxRect = this.getBox(this.boxRect);

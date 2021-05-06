@@ -37,7 +37,9 @@ public class DragonProgressConfigurable implements Configurable {
     public boolean isModified() {
         DragonProgressState settings = DragonProgressState.getInstance();
         boolean modified = !settingsComponent.getSelectedDragon().equals(settings.dragonImage)
-                           |settingsComponent.getColor() != settings.progressColor;
+                           |settingsComponent.getProgressColor() != settings.progressColor
+                           |settingsComponent.getBackColor() != settings.backColor
+                           |settingsComponent.getCustomBackEnabled() != settings.useCustomBackColor;
         return modified;
     }
 
@@ -45,15 +47,19 @@ public class DragonProgressConfigurable implements Configurable {
     public void apply() {
         DragonProgressState settings = DragonProgressState.getInstance();
         settings.dragonImage = settingsComponent.getSelectedDragon();
-        settings.progressColor = settingsComponent.getColor();
+        settings.progressColor = settingsComponent.getProgressColor();
+        settings.backColor = settingsComponent.getBackColor();
+        settings.useCustomBackColor = settingsComponent.getCustomBackEnabled();
         settingsComponent.updateProgressBars();
     }
 
     @Override
     public void reset() {
         DragonProgressState settings = DragonProgressState.getInstance();
-        settingsComponent.setSelection(settings.dragonImage);
-        settingsComponent.setColor(settings.progressColor);
+        settingsComponent.setSelectedDragon(settings.dragonImage);
+        settingsComponent.setProgressColor(settings.progressColor);
+        settingsComponent.setBackColor(settings.backColor);
+        settingsComponent.setCheckboxCustomBack(settings.useCustomBackColor);
     }
 
     @Override
