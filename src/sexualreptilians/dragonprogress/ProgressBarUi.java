@@ -94,52 +94,52 @@ public class ProgressBarUi extends BasicProgressBarUI {
 
     @Override
     protected void paintIndeterminate(Graphics g, JComponent c) {
-        if (g instanceof Graphics2D) {
-            Insets b = this.progressBar.getInsets();
-            int barRectWidth = this.progressBar.getWidth() - (b.right + b.left);
-            int barRectHeight = this.progressBar.getHeight() - (b.top + b.bottom);
+        if (!(g instanceof Graphics2D)) return;
 
-            if (barRectWidth > 0 && barRectHeight > 0) {
-                Graphics2D g2 = (Graphics2D)g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Insets b = this.progressBar.getInsets();
+        int barRectWidth = this.progressBar.getWidth() - (b.right + b.left);
+        int barRectHeight = this.progressBar.getHeight() - (b.top + b.bottom);
 
-                g2.setColor(this.progressBar.getForeground());
+        if (barRectWidth > 0 && barRectHeight > 0) {
+            Graphics2D g2 = (Graphics2D)g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-                // Paint the background
-                g2.setPaint((customBackColor) ? backgroundColor : progressBar.getBackground().darker());
-                g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight/2, barRectHeight/2);
+            g2.setColor(this.progressBar.getForeground());
 
-                this.boxRect = this.getBox(this.boxRect);
-                if (this.boxRect != null) {
-                    // Paint the progress bar
-                    //g2.setPaint(this.progressBar.getForeground().darker());
-                    //g2.fillRect(this.boxRect.x, this.boxRect.y, this.boxRect.width, this.boxRect.height);
+            // Paint the background
+            g2.setPaint((customBackColor) ? backgroundColor : progressBar.getBackground().darker());
+            g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight/2, barRectHeight/2);
 
-                    // Stupid state machine for mirroring
-                    // Otherwise I'd have to reimplement the animator
-                    if (this.boxRect.x-lastX < 0) {
-                        dir = Direction.BACK;
-                    }
-                    else if (this.boxRect.x-lastX > 0) {
-                        dir = Direction.FORWARD;
-                    }
-                    // Paint the dragon going either direction
-                    switch (dir) {
-                        case FORWARD:
-                            dragonIcon.paintIcon(c, g2, this.boxRect.x, b.top);
-                            break;
-                        case BACK:
-                            dragonIconM.paintIcon(c, g2, this.boxRect.x, b.top);
-                            break;
-                    }
-                    lastX = this.boxRect.x;
+            this.boxRect = this.getBox(this.boxRect);
+            if (this.boxRect != null) {
+                // Paint the progress bar
+                //g2.setPaint(this.progressBar.getForeground().darker());
+                //g2.fillRect(this.boxRect.x, this.boxRect.y, this.boxRect.width, this.boxRect.height);
+
+                // Stupid state machine for mirroring
+                // Otherwise I'd have to reimplement the animator
+                if (this.boxRect.x-lastX < 0) {
+                    dir = Direction.BACK;
                 }
-
-                if (this.progressBar.isStringPainted()) {
-                    this.paintString(g, b.left, b.top, barRectWidth, barRectHeight, barRectWidth, b);
+                else if (this.boxRect.x-lastX > 0) {
+                    dir = Direction.FORWARD;
                 }
-
+                // Paint the dragon going either direction
+                switch (dir) {
+                    case FORWARD:
+                        dragonIcon.paintIcon(c, g2, this.boxRect.x, b.top);
+                        break;
+                    case BACK:
+                        dragonIconM.paintIcon(c, g2, this.boxRect.x, b.top);
+                        break;
+                }
+                lastX = this.boxRect.x;
             }
+
+            if (this.progressBar.isStringPainted()) {
+                this.paintString(g, b.left, b.top, barRectWidth, barRectHeight, barRectWidth, b);
+            }
+
         }
     }
 
