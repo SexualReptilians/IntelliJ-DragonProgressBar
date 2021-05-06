@@ -13,7 +13,9 @@ import org.jetbrains.annotations.NotNull;
 )
 public class DragonProgressState implements PersistentStateComponent<DragonProgressState> {
     // TODO: Surely this can be stored better and not so ugly
-    public int color = 0xFFFFFF;
+    public int progressColor = 0xFFFFFF;
+    public int backColor = 0x000000;
+    public boolean useCustomBackColor = false;
     public String dragon = "/dragon_white.gif";
     public String dragon_m = "/dragon_white_m.gif";
     public String name = "White";
@@ -26,8 +28,7 @@ public class DragonProgressState implements PersistentStateComponent<DragonProgr
         return this;
     }
 
-    @NotNull
-    public void loadState(DragonProgressState state) {
+    public void loadState(@NotNull DragonProgressState state) {
         XmlSerializerUtil.copyBean(state, this);
     }
 }

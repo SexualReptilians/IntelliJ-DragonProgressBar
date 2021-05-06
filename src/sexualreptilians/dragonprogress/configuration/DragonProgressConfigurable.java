@@ -37,6 +37,7 @@ public class DragonProgressConfigurable implements Configurable {
     public boolean isModified() {
         DragonProgressState settings = DragonProgressState.getInstance();
         boolean modified = !settingsComponent.getColorName().equals(settings.name);
+        modified |= settingsComponent.getColor() != settings.progressColor;
         return modified;
     }
 
@@ -46,13 +47,15 @@ public class DragonProgressConfigurable implements Configurable {
         settings.name = settingsComponent.getColorName();
         settings.dragon = settingsComponent.getDragonName();
         settings.dragon_m = settingsComponent.getDragonMName();
-        settings.color = settingsComponent.getColor();
+        settings.progressColor = settingsComponent.getColor();
+        settingsComponent.updateProgressBars();
     }
 
     @Override
     public void reset() {
         DragonProgressState settings = DragonProgressState.getInstance();
         settingsComponent.setSelection(settings.name);
+        settingsComponent.setColor(settings.progressColor);
     }
 
     @Override

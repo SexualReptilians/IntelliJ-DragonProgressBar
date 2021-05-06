@@ -1,11 +1,19 @@
 package sexualreptilians.dragonprogress.configuration;
 
+import com.intellij.openapi.ui.ComboBox;
+import com.intellij.ui.ColorPanel;
+import com.intellij.ui.JBProgressBar;
 import com.intellij.ui.components.JBLabel;
-import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.FormBuilder;
 import org.jetbrains.annotations.NotNull;
+import sexualreptilians.dragonprogress.ProgressBarUi;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * Supports creating and managing a {@link JPanel} for the Settings Dialog.
@@ -13,11 +21,18 @@ import javax.swing.*;
 public class DragonProgressSettingsComponent {
 
     private final JPanel myMainPanel;
-    private final JBList<DragonProgressColor> colorsList = new JBList<>();
-    private final DefaultListModel<DragonProgressColor> listModel = new DefaultListModel<>();
+
+    private final ComboBox<DragonProgressColor> dragonList = new ComboBox<>();
+    DefaultComboBoxModel<DragonProgressColor> listModel;
+
+    private final JProgressBar previewDeterminate = new JProgressBar();
+    private final JProgressBar previewIndeteminate = new JProgressBar();
+
+    private final ColorPanel colorPicker = new ColorPanel();
 
     public DragonProgressSettingsComponent() {
         // TODO: Make this not shit
+        listModel = (DefaultComboBoxModel<DragonProgressColor>) dragonList.getModel();
         listModel.addElement((new DragonProgressColor(0xFF0000, "/dragon_red.gif", "/dragon_red_m.gif", "Red")));
         listModel.addElement((new DragonProgressColor(0x00FF00, "/dragon_green.gif", "/dragon_green_m.gif", "Green")));
         listModel.addElement((new DragonProgressColor(0x0000FF, "/dragon_blue.gif", "/dragon_blue_m.gif", "Blue")));
@@ -28,14 +43,18 @@ public class DragonProgressSettingsComponent {
         listModel.addElement((new DragonProgressColor(0xff0000, "/dragon_lime.gif", "/dragon_lime_m.gif", "Lime")));
         listModel.addElement((new DragonProgressColor(0xff0000, "/dragon_cyan.gif", "/dragon_cyan_m.gif", "Cyan")));
         listModel.addElement((new DragonProgressColor(0xff0000, "/dragon_purple.gif", "/dragon_purple_m.gif", "Purple")));
+        dragonList.setSelectedIndex(0);
+        dragonList.setModel(listModel);
 
-        colorsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        colorsList.setVisibleRowCount(-1);
-        colorsList.setSelectedIndex(0);
-        colorsList.setModel(listModel);
+        previewDeterminate.setValue(50);
+        previewIndeteminate.setIndeterminate(true);
 
         myMainPanel = FormBuilder.createFormBuilder()
-                .addLabeledComponent(new JBLabel("Select Color:"), colorsList, 1, true)
+                .addComponent(previewDeterminate)
+                .addComponent(previewIndeteminate)
+                .addSeparator()
+                .addLabeledComponent(new JBLabel("Select dragon:"), dragonList, 1)
+                .addLabeledComponent(new JBLabel("Color:"), colorPicker, 1)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
@@ -45,38 +64,47 @@ public class DragonProgressSettingsComponent {
     }
 
     public JComponent getPreferredFocusedComponent() {
-        return colorsList;
+        return dragonList;
     }
 
     @NotNull
     public String getColorName() {
-        return colorsList.getSelectedValue().getName();
+        return listModel.getElementAt(dragonList.getSelectedIndex()).getName();
     }
 
     @NotNull
     public String getDragonName() {
-        return colorsList.getSelectedValue().getDragon();
+        return listModel.getElementAt(dragonList.getSelectedIndex()).getDragon();
     }
 
     @NotNull
     public String getDragonMName() {
-        return colorsList.getSelectedValue().getDragonM();
+        return listModel.getElementAt(dragonList.getSelectedIndex()).getDragonM();
     }
 
     @NotNull
     public int getColor() {
-        return colorsList.getSelectedValue().getColor();
+        return colorPicker.getSelectedColor().hashCode();
+    }
+
+    public void updateProgressBars() {
+        previewDeterminate.setUI(new ProgressBarUi());
+        previewIndeteminate.setUI(new ProgressBarUi());
+    }
+
+    public void setColor(int color) {
+        colorPicker.setSelectedColor(new Color(color));
     }
 
     // TODO: This is disgusting
     public void setSelection(String name) {
         for (int i = 0; i < listModel.getSize(); i++) {
-            if (listModel.get(i).getName().equals(name)) {
-                colorsList.setSelectedIndex(i);
+            if (listModel.getElementAt(i).getName().equals(name)) {
+                dragonList.setSelectedIndex(i);
                 return;
             }
         }
-        colorsList.setSelectedIndex(0);
+        dragonList.setSelectedIndex(0);
     }
 
 }

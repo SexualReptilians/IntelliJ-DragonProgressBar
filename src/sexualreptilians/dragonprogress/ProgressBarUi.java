@@ -25,7 +25,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
         DragonProgressState settings = DragonProgressState.getInstance();
         dragonIcon = new ImageIcon(this.getClass().getResource(settings.dragon));
         dragonIconM = new ImageIcon(this.getClass().getResource(settings.dragon_m));
-        progressColor = new Color(settings.color);
+        progressColor = new Color(settings.progressColor);
     }
 
     @SuppressWarnings({"MethodOverridesStaticMethodOfSuperclass", "UnusedDeclaration"})
