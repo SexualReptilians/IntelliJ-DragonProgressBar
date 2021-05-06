@@ -1,37 +1,42 @@
 package sexualreptilians.dragonprogress.configuration;
 
+import java.util.ArrayList;
+
 public class DragonProgressColor {
 
-    private int color;
-    private String dragon;
-    private String dragon_m;
-    private String name;
+    public static final ArrayList<DragonProgressColor> dragons = new ArrayList<>() {
+        {
+            add(new DragonProgressColor("dragon_red", "Red"));
+            add(new DragonProgressColor("dragon_green", "Green"));
+            add(new DragonProgressColor("dragon_blue", "Blue"));
+            add(new DragonProgressColor("dragon_black", "Black"));
+            add(new DragonProgressColor("dragon_white", "White"));
+            add(new DragonProgressColor("dragon_yellow", "Yellow"));
+            add(new DragonProgressColor("dragon_orange", "Orange"));
+            add(new DragonProgressColor("dragon_lime", "Lime"));
+            add(new DragonProgressColor("dragon_cyan", "Cyan"));
+            add(new DragonProgressColor("dragon_purple", "Purple"));
+        }
+    };
 
-    public DragonProgressColor(int c, String d, String dm, String n) {
-        color = c;
-        dragon = d;
-        dragon_m = dm;
-        name = n;
+    private final String image;
+    private final String name;
+
+    public DragonProgressColor(String img, String nm) {
+        image = img;
+        name = nm;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String getDragon() {
-        return this.dragon;
-    }
-
-    public String getDragonM() {
-        return this.dragon_m;
-    }
-
-    public int getColor() {
-        return this.color;
+    public String getDragonImage() {
+        return this.image;
     }
 
     public String toString()
     {
-        return this.name;
+        return getName();
     }
 }

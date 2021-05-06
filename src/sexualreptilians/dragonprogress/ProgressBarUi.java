@@ -23,8 +23,8 @@ public class ProgressBarUi extends BasicProgressBarUI {
 
     public ProgressBarUi() {
         DragonProgressState settings = DragonProgressState.getInstance();
-        dragonIcon = new ImageIcon(this.getClass().getResource(settings.dragon));
-        dragonIconM = new ImageIcon(this.getClass().getResource(settings.dragon_m));
+        dragonIcon = new ImageIcon(this.getClass().getResource(settings.getDragonImage()));
+        dragonIconM = new ImageIcon(this.getClass().getResource(settings.getDragonImageM()));
         progressColor = new Color(settings.progressColor);
     }
 

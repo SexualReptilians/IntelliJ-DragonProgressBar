@@ -5,6 +5,7 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import org.jetbrains.annotations.NotNull;
 
 @State(
@@ -12,13 +13,20 @@ import org.jetbrains.annotations.NotNull;
         storages = {@Storage("DragonProgress.xml")}
 )
 public class DragonProgressState implements PersistentStateComponent<DragonProgressState> {
-    // TODO: Surely this can be stored better and not so ugly
     public int progressColor = 0xFFFFFF;
     public int backColor = 0x000000;
     public boolean useCustomBackColor = false;
-    public String dragon = "/dragon_white.gif";
-    public String dragon_m = "/dragon_white_m.gif";
-    public String name = "White";
+    public String dragonImage = "dragon_white";
+
+    @Transient
+    public String getDragonImage() {
+        return "/" + dragonImage + ".gif";
+    }
+
+    @Transient
+    public String getDragonImageM() {
+        return "/" + dragonImage + "_m.gif";
+    }
 
     public static DragonProgressState getInstance() {
         return ServiceManager.getService(DragonProgressState.class);

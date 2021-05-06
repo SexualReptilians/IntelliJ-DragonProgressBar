@@ -18,7 +18,7 @@ public class DragonProgressConfigurable implements Configurable {
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
     public String getDisplayName() {
-        return "SDK: Application Settings Example";
+        return "Dragon Progress Bar";
     }
 
     @Override
@@ -36,17 +36,15 @@ public class DragonProgressConfigurable implements Configurable {
     @Override
     public boolean isModified() {
         DragonProgressState settings = DragonProgressState.getInstance();
-        boolean modified = !settingsComponent.getColorName().equals(settings.name);
-        modified |= settingsComponent.getColor() != settings.progressColor;
+        boolean modified = !settingsComponent.getSelectedDragon().equals(settings.dragonImage)
+                           |settingsComponent.getColor() != settings.progressColor;
         return modified;
     }
 
     @Override
     public void apply() {
         DragonProgressState settings = DragonProgressState.getInstance();
-        settings.name = settingsComponent.getColorName();
-        settings.dragon = settingsComponent.getDragonName();
-        settings.dragon_m = settingsComponent.getDragonMName();
+        settings.dragonImage = settingsComponent.getSelectedDragon();
         settings.progressColor = settingsComponent.getColor();
         settingsComponent.updateProgressBars();
     }
@@ -54,7 +52,7 @@ public class DragonProgressConfigurable implements Configurable {
     @Override
     public void reset() {
         DragonProgressState settings = DragonProgressState.getInstance();
-        settingsComponent.setSelection(settings.name);
+        settingsComponent.setSelection(settings.dragonImage);
         settingsComponent.setColor(settings.progressColor);
     }
 
