@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import org.jdesktop.swingx.graphics.BlendComposite;
 
 public class FilterableImageIcon extends ImageIcon {
     public final transient BufferedImage colored;
@@ -14,7 +15,7 @@ public class FilterableImageIcon extends ImageIcon {
     public FilterableImageIcon(URL resource, int tintColor) {
         super(resource);
         this.colored = UIUtil.createImage(null, this.getIconWidth(), this.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-        this.tintColor = new Color((tintColor & 0x00_FFFFFF) | 0x80_000000, true);      // 0xAA_RRGGBB
+        this.tintColor = new Color(tintColor);      // 0xAA_RRGGBB
     }
 
     @Override
@@ -23,15 +24,18 @@ public class FilterableImageIcon extends ImageIcon {
         Graphics2D cg2d = colored.createGraphics();
 
         // Clear graphics and get the image
-        cg2d.setComposite(AlphaComposite.Clear);
-        cg2d.fillRect(0, 0, this.getIconWidth(), this.getIconHeight());
+        cg2d.clearRect(0, 0, this.getIconWidth(), this.getIconHeight());
+
         cg2d.setComposite(AlphaComposite.SrcOver);
         cg2d.drawImage(this.getImage(), 0, 0, c);
 
-        // Tint the image
-        cg2d.setComposite(AlphaComposite.SrcAtop);
+        cg2d.setComposite(BlendComposite.Multiply);
         cg2d.setColor(tintColor);
         cg2d.fillRect(0, 0, this.getIconWidth(), this.getIconHeight());
+
+        cg2d.setComposite(AlphaComposite.DstIn);
+        cg2d.drawImage(this.getImage(), 0, 0, c);
+
         cg2d.dispose();
 
         if (this.getImageObserver() == null) {
