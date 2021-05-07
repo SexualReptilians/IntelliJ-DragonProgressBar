@@ -1,7 +1,6 @@
 package sexualreptilians.dragonprogress;
 import com.intellij.ide.AppLifecycleListener;
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
