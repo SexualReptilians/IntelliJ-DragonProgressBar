@@ -32,10 +32,12 @@ public class DragonProgressState implements PersistentStateComponent<DragonProgr
         return ServiceManager.getService(DragonProgressState.class);
     }
 
+    @Override
     public DragonProgressState getState() {
         return this;
     }
 
+    @Override
     public void loadState(@NotNull DragonProgressState state) {
         XmlSerializerUtil.copyBean(state, this);
     }
