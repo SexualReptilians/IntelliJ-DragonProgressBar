@@ -1,12 +1,10 @@
 package sexualreptilians.dragonprogress.configuration;
 
-import com.intellij.openapi.ui.ComboBox;
 import com.intellij.ui.ColorPanel;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
-import org.jetbrains.annotations.NotNull;
 import sexualreptilians.dragonprogress.ProgressBarUi;
 
 import javax.swing.*;
