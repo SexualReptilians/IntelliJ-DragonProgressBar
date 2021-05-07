@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class DragonProgressState implements PersistentStateComponent<DragonProgressState> {
     public int progressColor = 0xFFFFFF;
     public int backColor = 0x000000;
+    public int tintColor = 0xFFFFFF;
     public boolean useCustomBackColor = false;
     public String dragonImage = "dragon_white";
 

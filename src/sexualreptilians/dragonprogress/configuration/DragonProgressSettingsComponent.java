@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import sexualreptilians.dragonprogress.ProgressBarUi;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * Supports creating and managing a {@link JPanel} for the Settings Dialog.
@@ -26,6 +26,7 @@ public class DragonProgressSettingsComponent {
     private final JProgressBar previewIndeteminate = new JProgressBar();
 
     private final ColorPanel progressColorPicker = new ColorPanel();
+    private final ColorPanel tintColorPicker = new ColorPanel();
     private final ColorPanel backColorPicker = new ColorPanel();
 
     private final JBCheckBox checkboxCustomBack = new JBCheckBox();
@@ -47,6 +48,7 @@ public class DragonProgressSettingsComponent {
                 .addSeparator(JBUI.scale(20))
                 .addLabeledComponent(new JBLabel("Select dragon"), dragonList, 1)
                 .addLabeledComponent(new JBLabel("Color"), progressColorPicker, 1)
+                .addLabeledComponent(new JBLabel("Tint"), tintColorPicker, 1)
                 .addSeparator()
                 .addLabeledComponent(new JBLabel("Use custom back color"), checkboxCustomBack, 1)
                 .addLabeledComponent(new JBLabel("Background color"), backColorPicker, 1)
@@ -85,6 +87,14 @@ public class DragonProgressSettingsComponent {
         progressColorPicker.setSelectedColor(new Color(color));
     }
 
+    public int getTintColor() {
+        return tintColorPicker.getSelectedColor().getRGB();
+    }
+
+    public void setTintColor(int color) {
+        tintColorPicker.setSelectedColor(new Color(color));
+    }
+
     public int getBackColor() {
         return backColorPicker.getSelectedColor().getRGB();
     }
@@ -104,5 +114,10 @@ public class DragonProgressSettingsComponent {
     public void updateProgressBars() {
         previewDeterminate.setUI(new ProgressBarUi());
         previewIndeteminate.setUI(new ProgressBarUi());
+    }
+
+    public void updateProgressBars(DragonProgressState settings) {
+        previewDeterminate.setUI(new ProgressBarUi(settings));
+        previewIndeteminate.setUI(new ProgressBarUi(settings));
     }
 }

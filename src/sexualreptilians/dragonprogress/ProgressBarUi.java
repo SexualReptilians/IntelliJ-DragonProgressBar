@@ -24,10 +24,14 @@ public class ProgressBarUi extends BasicProgressBarUI {
     private Direction dir = Direction.FORWARD;
 
     public ProgressBarUi() {
-        DragonProgressState settings = DragonProgressState.getInstance();
+        this(DragonProgressState.getInstance());
+    }
+
+    // also used for previewing settings without modifying the state instance
+    public ProgressBarUi(DragonProgressState settings) {
         // TODO: Handle nulls (for people messing with the config)
-        dragonIcon = new ImageIcon(this.getClass().getResource(settings.getDragonImage()));
-        dragonIconM = new ImageIcon(this.getClass().getResource(settings.getDragonImageM()));
+        dragonIcon = new FilterableImageIcon(this.getClass().getResource(settings.getDragonImage()), settings.tintColor);
+        dragonIconM = new FilterableImageIcon(this.getClass().getResource(settings.getDragonImageM()), settings.tintColor);
         progressColor = new Color(settings.progressColor);
         backgroundColor = new Color(settings.backColor);
         customBackColor = settings.useCustomBackColor;
