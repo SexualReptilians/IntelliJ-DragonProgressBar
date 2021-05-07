@@ -57,7 +57,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
                 b.top,
                 progressColor.darker(),
                 b.right,
-                b.top+(barRectHeight/2.0f),
+                b.top+(barRectHeight/2),
                 progressColor,
                 true
             );
