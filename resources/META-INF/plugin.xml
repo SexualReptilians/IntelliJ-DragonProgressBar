@@ -28,5 +28,6 @@
   <applicationListeners>
     <listener class="sexualreptilians.dragonprogress.ProgressBarLafManagerListener"
               topic="com.intellij.ide.ui.LafManagerListener" />
+    <listener class="sexualreptilians.dragonprogress.ImagePreloader" topic="com.intellij.ide.AppLifecycleListener" />
   </applicationListeners>
 </idea-plugin>

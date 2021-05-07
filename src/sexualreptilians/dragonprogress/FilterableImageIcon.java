@@ -2,6 +2,7 @@ package sexualreptilians.dragonprogress;
 
 import com.intellij.util.ui.UIUtil;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,10 +13,10 @@ public class FilterableImageIcon extends ImageIcon {
     public final transient BufferedImage colored;
     private final Color tintColor;
 
-    public FilterableImageIcon(URL resource, int tintColor) {
+    public FilterableImageIcon(Image resource, int tintColor) {
         super(resource);
         this.colored = UIUtil.createImage(null, this.getIconWidth(), this.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-        this.tintColor = new Color(tintColor);      // 0xAA_RRGGBB
+        this.tintColor = new Color(tintColor);
     }
 
     @Override

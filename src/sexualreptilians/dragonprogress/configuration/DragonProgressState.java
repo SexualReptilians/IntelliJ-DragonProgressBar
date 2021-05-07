@@ -17,17 +17,6 @@ public class DragonProgressState implements PersistentStateComponent<DragonProgr
     public int backColor = 0x000000;
     public int tintColor = 0xFFFFFF;
     public boolean useCustomBackColor = false;
-    public String dragonImage = "dragon_white";
-
-    @Transient
-    public String getDragonImage() {
-        return "/" + dragonImage + ".gif";
-    }
-
-    @Transient
-    public String getDragonImageM() {
-        return "/" + dragonImage + "_m.gif";
-    }
 
     public static DragonProgressState getInstance() {
         return ServiceManager.getService(DragonProgressState.class);
