@@ -27,11 +27,18 @@ public class TintableImageIcon extends ImageIcon {
 
     @Override
     public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
+        paintIcon(c, g, x, y, false);
+    }
+
+    public synchronized void paintIcon(Component c, Graphics g, int x, int y, boolean flipped) {
         // Clear graphics and get the image
         cg2d.clearRect(0, 0, this.getIconWidth(), this.getIconHeight());
 
         cg2d.setComposite(AlphaComposite.SrcOver);
-        cg2d.drawImage(this.getImage(), 0, 0, c);
+        if (flipped)
+            cg2d.drawImage(this.getImage(), this.getIconWidth(), 0, -this.getIconWidth(), this.getIconHeight(), c);
+        else
+            cg2d.drawImage(this.getImage(), 0, 0, c);
 
         cg2d.setComposite(BlendMulComposite.getInstance());
         cg2d.setColor(tintColor);

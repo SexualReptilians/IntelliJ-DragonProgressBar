@@ -24,11 +24,6 @@ public class DragonProgressState implements PersistentStateComponent<DragonProgr
         return "/" + dragonImage + ".gif";
     }
 
-    @Transient
-    public String getDragonImageM() {
-        return "/" + dragonImage + "_m.gif";
-    }
-
     public static DragonProgressState getInstance() {
         return ServiceManager.getService(DragonProgressState.class);
     }
