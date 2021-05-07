@@ -24,7 +24,6 @@ public class ProgressBarUi extends BasicProgressBarUI {
     public ProgressBarUi(DragonProgressState settings) {
         // TODO: Handle nulls (for people messing with the config)
         dragonIcon = new TintableImageIcon(ImagePreloader.getImage(), settings.tintColor);
-        dragonIconM = new TintableImageIcon(ImagePreloader.getImage(), settings.tintColor);
         progressColor = new Color(settings.progressColor);
         backgroundColor = new Color(settings.backColor);
         customBackColor = settings.useCustomBackColor;
@@ -94,7 +93,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
             if (this.boxRect != null) {
                 // Nexrem saw a dragon looking at him
                 // and thought there's a third state of the dragon's direction
-                dragonIcon.paintIcon(c, g2, this.boxRect.x, b.top, (this.boxRect.x - lastX > 0));
+                dragonIcon.paintIcon(c, g2, this.boxRect.x, b.top, (this.boxRect.x - lastX < 0));
 
                 lastX = this.boxRect.x;
             }
