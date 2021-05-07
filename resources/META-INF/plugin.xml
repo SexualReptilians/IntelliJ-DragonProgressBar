@@ -16,9 +16,9 @@
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
     <applicationService serviceImplementation="sexualreptilians.dragonprogress.configuration.DragonProgressState"/>
-    <applicationConfigurable parentId="tools" instance="sexualreptilians.dragonprogress.configuration.DragonProgressConfigurable"
+    <applicationConfigurable instance="sexualreptilians.dragonprogress.configuration.DragonProgressConfigurable"
                              id="sexualreptilians.dragonprogress.configuration.DragonProgressConfigurable"
-                             displayName="Dragon Progress Config"/>
+                             displayName="Dragon Progress Bar"/>
   </extensions>
 
   <actions>
