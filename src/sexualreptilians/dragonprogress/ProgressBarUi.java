@@ -23,7 +23,8 @@ public class ProgressBarUi extends BasicProgressBarUI {
     // also used for previewing settings without modifying the state instance
     public ProgressBarUi(DragonProgressState settings) {
         // TODO: Handle nulls (for people messing with the config)
-        dragonIcon = new TintableImageIcon(this.getClass().getResource(settings.getDragonImage()), settings.tintColor);
+        dragonIcon = new TintableImageIcon(ImagePreloader.getImage(), settings.tintColor);
+        dragonIconM = new TintableImageIcon(ImagePreloader.getImage(), settings.tintColor);
         progressColor = new Color(settings.progressColor);
         backgroundColor = new Color(settings.backColor);
         customBackColor = settings.useCustomBackColor;

@@ -8,21 +8,19 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
-import java.net.URL;
 
 public class TintableImageIcon extends ImageIcon {
     public final transient BufferedImage tintedImage;
     private final Color tintColor;
     private final Graphics2D cg2d;
 
-    public TintableImageIcon(URL resource, int tintColor) {
+    public TintableImageIcon(Image resource, int tintColor) {
         super(resource);
 
         this.tintedImage = UIUtil.createImage(null, this.getIconWidth(), this.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
         this.cg2d = tintedImage.createGraphics();
         this.cg2d.setBackground(new Color(0x00_FFFFFF, true));
-
-        this.tintColor = new Color(tintColor);      // 0xAA_RRGGBB
+        this.tintColor = new Color(tintColor);
     }
 
     @Override
@@ -50,6 +48,7 @@ public class TintableImageIcon extends ImageIcon {
             g.drawImage(tintedImage, x, y, this.getImageObserver());
         }
     }
+
 }
 
 class BlendMulComposite implements Composite {

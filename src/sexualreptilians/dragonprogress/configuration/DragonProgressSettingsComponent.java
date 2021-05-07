@@ -19,9 +19,6 @@ public class DragonProgressSettingsComponent {
 
     private final JPanel myMainPanel;
 
-    private final ComboBox<DragonProgressColor> dragonList = new ComboBox<>();
-    DefaultComboBoxModel<DragonProgressColor> listModel;
-
     private final JProgressBar previewDeterminate = new JProgressBar();
     private final JProgressBar previewIndeteminate = new JProgressBar();
 
@@ -32,10 +29,6 @@ public class DragonProgressSettingsComponent {
     private final JBCheckBox checkboxCustomBack = new JBCheckBox();
 
     public DragonProgressSettingsComponent() {
-        // push the list to the combobox
-        listModel = (DefaultComboBoxModel<DragonProgressColor>) dragonList.getModel();
-        listModel.addAll(DragonProgressColor.dragons);
-        dragonList.setSelectedIndex(0);
 
         // Setup preview progress bars
         previewDeterminate.setValue(50);
@@ -46,7 +39,6 @@ public class DragonProgressSettingsComponent {
                 .addComponent(previewDeterminate)
                 .addComponent(previewIndeteminate)
                 .addSeparator(JBUI.scale(20))
-                .addLabeledComponent(new JBLabel("Select dragon"), dragonList, 1)
                 .addLabeledComponent(new JBLabel("Color"), progressColorPicker, 1)
                 .addLabeledComponent(new JBLabel("Tint"), tintColorPicker, 1)
                 .addSeparator()
@@ -58,25 +50,6 @@ public class DragonProgressSettingsComponent {
 
     public JPanel getPanel() {
         return myMainPanel;
-    }
-
-    public JComponent getPreferredFocusedComponent() {
-        return dragonList;
-    }
-
-    @NotNull
-    public String getSelectedDragon() {
-        return listModel.getElementAt(dragonList.getSelectedIndex()).getDragonImage();
-    }
-
-    public void setSelectedDragon(String image) {
-        for (int i = 0; i < listModel.getSize(); i++) {
-            if (listModel.getElementAt(i).getDragonImage().equals(image)) {
-                dragonList.setSelectedIndex(i);
-                return;
-            }
-        }
-        dragonList.setSelectedIndex(-1);
     }
 
     public int getProgressColor() {
