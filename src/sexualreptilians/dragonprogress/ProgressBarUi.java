@@ -14,6 +14,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
     private final Color backgroundColor;
     private final boolean customBackColor;
 
+    private boolean lastDirFlipped = false;
     private int lastX = 0;
 
     public ProgressBarUi() {
@@ -93,7 +94,13 @@ public class ProgressBarUi extends BasicProgressBarUI {
             if (this.boxRect != null) {
                 // Nexrem saw a dragon looking at him
                 // and thought there's a third state of the dragon's direction
-                dragonIcon.paintIcon(c, g2, this.boxRect.x, b.top, (this.boxRect.x - lastX < 0));
+
+                // apparently the third state *does* exist... so we avoid that... maybe...
+                // I believe you now Nexrem
+                if (lastX != this.boxRect.x)
+                    lastDirFlipped = (this.boxRect.x - lastX < 0);
+
+                dragonIcon.paintIcon(c, g2, this.boxRect.x, b.top, lastDirFlipped);
 
                 lastX = this.boxRect.x;
             }
@@ -102,7 +109,6 @@ public class ProgressBarUi extends BasicProgressBarUI {
                 this.paintString(g2, b.left, b.top, barRectWidth, barRectHeight, barRectHeight, b);
             }
         }
-
     }
 
     // true if draw is possible
