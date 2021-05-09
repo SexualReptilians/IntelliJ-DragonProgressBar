@@ -1,13 +1,37 @@
 <idea-plugin>
   <id>sexualreptilians.dragonprogress</id>
   <name>Dragon Progress Bar</name>
-  <version>0.1</version>
+  <version>1.0</version>
   <idea-version since-build="193"/>
-  <vendor>A lizard</vendor>
+  <vendor>Lyrthras, Nexrem</vendor>
 
-  <description>This needs to be over 40 characters for some reason</description>
+  <description>
+    <![CDATA[
+      This plugin replaces IntelliJ progressbars with little animated colorful dragons.
+      The dragon colors and progressbar colors are fully customizeable in the settings menu
+      to any arbitrary color.
+      <br>
+      <b>Preview:</b>
+      <br>
+      Determinate:
+      <br>
+      <img src="https://github.com/SexualReptilians/IntelliJ-DragonProgressBar/raw/master/raw/redbar.gif" title="redbar" />
+      <br>
+      <img src="https://github.com/SexualReptilians/IntelliJ-DragonProgressBar/raw/master/raw/goldbar.gif" title="goldbar" />
+      <br>
+      Indeterminate:
+      <br>
+      <img src="https://github.com/SexualReptilians/IntelliJ-DragonProgressBar/raw/master/raw/redloop.gif" title="redloop" />
+      <br>
+      <img src="https://github.com/SexualReptilians/IntelliJ-DragonProgressBar/raw/master/raw/goldloop.gif" title="goldloop" />
+    ]]>
+  </description>
 
-  <change-notes>None</change-notes>
+  <change-notes>
+    <![CDATA[
+      <em>1.0 Initial release</em><br>
+    ]]>
+  </change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
        on how to target different products -->
