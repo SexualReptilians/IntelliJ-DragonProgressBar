@@ -1,4 +1,5 @@
 package sexualreptilians.dragonprogress.configuration;
+
 import com.intellij.openapi.options.Configurable;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -32,9 +33,9 @@ public class DragonProgressConfigurable implements Configurable {
     public boolean isModified() {
         DragonProgressState settings = DragonProgressState.getInstance();
         boolean modified = settingsComponent.getProgressColor() != settings.progressColor
-                           |settingsComponent.getBackColor() != settings.backColor
-                           |settingsComponent.getTintColor() != settings.tintColor
-                           |settingsComponent.getCustomBackEnabled() != settings.useCustomBackColor;
+                | settingsComponent.getBackColor() != settings.backColor
+                | settingsComponent.getTintColor() != settings.tintColor
+                | settingsComponent.getCustomBackEnabled() != settings.useCustomBackColor;
         if (modified) {
             DragonProgressState s = new DragonProgressState();
             s.progressColor = settingsComponent.getProgressColor();

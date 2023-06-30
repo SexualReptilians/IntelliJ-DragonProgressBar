@@ -80,11 +80,11 @@ class BlendMulComposite implements Composite {
             int[] srcPixels = new int[width];
             int[] dstPixels = new int[width];
 
-            for(int y = 0; y < height; ++y) {
+            for (int y = 0; y < height; ++y) {
                 src.getDataElements(0, y, width, 1, srcPixels);
                 dstIn.getDataElements(0, y, width, 1, dstPixels);
 
-                for(int x = 0; x < width; ++x) {
+                for (int x = 0; x < width; ++x) {
                     int pixel = srcPixels[x];
                     srcPixel[0] = pixel & 255;
                     srcPixel[1] = pixel >> 8 & 255;
@@ -99,9 +99,9 @@ class BlendMulComposite implements Composite {
                     result[2] = srcPixel[2] * dstPixel[2] >> 8;
 
                     dstPixels[x] = (dstPixels[x] & 0xFF_000000)
-                        | (int)((float)dstPixel[0] + (float)(result[0] - dstPixel[0])) & 255
-                        | ((int)((float)dstPixel[1] + (float)(result[1] - dstPixel[1])) & 255) << 8
-                        | ((int)((float)dstPixel[2] + (float)(result[2] - dstPixel[2])) & 255) << 16;
+                            | (int) ((float) dstPixel[0] + (float) (result[0] - dstPixel[0])) & 255
+                            | ((int) ((float) dstPixel[1] + (float) (result[1] - dstPixel[1])) & 255) << 8
+                            | ((int) ((float) dstPixel[2] + (float) (result[2] - dstPixel[2])) & 255) << 16;
                 }
 
                 dstOut.setDataElements(0, y, width, 1, dstPixels);

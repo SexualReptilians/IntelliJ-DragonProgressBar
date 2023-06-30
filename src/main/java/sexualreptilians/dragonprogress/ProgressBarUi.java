@@ -43,7 +43,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
     @Override
     protected void paintDeterminate(Graphics g, JComponent c) {
         if (!(g instanceof Graphics2D)) return;
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
         if (doBackground(g2)) {
             Insets b = this.progressBar.getInsets();
@@ -54,25 +54,25 @@ public class ProgressBarUi extends BasicProgressBarUI {
 
             // Paint the progress bar
             GradientPaint gradient = new GradientPaint(
-                b.right,
-                b.top,
-                progressColor.darker(),
-                b.right,
-                b.top+(barRectHeight/2),
-                progressColor,
-                true
+                    b.right,
+                    b.top,
+                    progressColor.darker(),
+                    b.right,
+                    b.top + (barRectHeight / 2),
+                    progressColor,
+                    true
             );
             g2.setPaint(gradient);
-            g2.fillRoundRect(b.left, b.top, b.left+amountFull, barRectHeight, barRectHeight/2, barRectHeight/2);
+            g2.fillRoundRect(b.left, b.top, b.left + amountFull, barRectHeight, barRectHeight / 2, barRectHeight / 2);
 
             // Clamp dragon so it never clips
-            int dragonPosition = amountFull - dragonIcon.getIconWidth()/2;
+            int dragonPosition = amountFull - dragonIcon.getIconWidth() / 2;
             if (dragonPosition + dragonIcon.getIconWidth() > barRectWidth) {
                 dragonPosition = barRectWidth - dragonIcon.getIconWidth();
             }
 
             // Paint the dragon
-            dragonIcon.paintIcon(c, g2, b.left+dragonPosition, b.top);
+            dragonIcon.paintIcon(c, g2, b.left + dragonPosition, b.top);
 
             if (this.progressBar.isStringPainted()) {
                 this.paintString(g2, b.left, b.top, barRectWidth, barRectHeight, barRectHeight, b);
@@ -83,7 +83,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
     @Override
     protected void paintIndeterminate(Graphics g, JComponent c) {
         if (!(g instanceof Graphics2D)) return;
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
         if (doBackground(g2)) {
             Insets b = this.progressBar.getInsets();
@@ -125,7 +125,7 @@ public class ProgressBarUi extends BasicProgressBarUI {
 
             // Paint the background
             g2.setPaint((customBackColor) ? backgroundColor : progressBar.getBackground().darker());
-            g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight/2, barRectHeight/2);
+            g2.fillRoundRect(b.left, b.top, barRectWidth, barRectHeight, barRectHeight / 2, barRectHeight / 2);
 
             return true;
         }
